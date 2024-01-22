@@ -29,7 +29,7 @@ namespace ConsoleAppProject.App01
         {
             Console.Write("Please Enter the number of miles > ");
             string value = Console.ReadLine();
-            miles = double.Parse(value);
+            miles = Convert.ToDouble(value);
         }
 
         private void CalculateFeet()
