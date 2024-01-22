@@ -15,6 +15,9 @@ namespace ConsoleAppProject.App01
 
         public void Run()
         {
+            InputMiles();
+            CalculateFeet();
+            OutputFeet();
 
         }
 
@@ -24,7 +27,9 @@ namespace ConsoleAppProject.App01
         /// </summary>
         private void InputMiles()
         {
-
+            Console.Write("Please Enter the number of miles > ");
+            string value = Console.ReadLine();
+            miles = double.Parse(value);
         }
 
         private void CalculateFeet()
