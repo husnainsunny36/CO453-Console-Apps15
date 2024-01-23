@@ -3,46 +3,127 @@
 namespace ConsoleAppProject.App01
 {
     /// <summary>
-    /// Please describe the main features of this App
+    /// This App will prompt the user to input a distance
+    /// measured in one unit (fromUnit) and it will calculate and
+    /// output the equivalent distance in another unit (toUnit)
     /// </summary>
     /// <author>
-    /// Husnain Version 0.3
+    /// Husnain Version 0.6
     /// </author>
     public class DistanceConverter
     {
         public const int FEET_IN_MILES = 5280;
         public const double METRE_IN_MILES = 1609.34;
-        private double miles;
-        private double feet;
-        private double metres;
+        public const double FEET_IN_METRES = 3.28084;
 
+        public const string FEET = "feet";
+        public const string METRES = "metres";
+        public const string MILES = "miles";
 
-        public void MilesToFeet()
+        private double fromDistance;
+        private double toDistance;
+
+        private string fromUnit;
+        private string toUnit;
+
+        public DistanceConverter ()
         {
-            OutputHeading("Converting Miles To Feet");
-            miles = InputDistance("Please Enter The Number of Miles > ");
-            CalculateFeet();
-            OutputDistance(miles, nameof (miles), feet , nameof (feet));
+            fromUnit = MILES;
+            toUnit = FEET;
+        }
+
+        /// <summary>
+        /// This method will input the distance measured in miles
+        /// calculate the same distance in feet, and output the
+        /// distance in feet.
+        /// </summary>
+
+        public void ConvertDistance()
+        {
+            OutputHeading();
+
+            fromUnit = SelectUnit(" Please select the from distance unit > ");
+            toUnit = SelectUnit(" Please select the to distance unit > ");
+
+            Console.WriteLine($"\n Converting {fromUnit} To {toUnit}");
+
+            fromDistance  = InputDistance($" Enter The Number of {fromUnit} > ");
+
+            CalculateDistance();
+
+            OutputDistance();
 
         }
 
-        public void FeetToMiles()
+        private void CalculateDistance()
         {
-            OutputHeading("Converting Feet To Miles");
-            feet = InputDistance("Please Enter The Number of Feet > ");
-            CalculateMiles();
-            OutputDistance(feet, nameof(feet), miles, nameof(miles));
+            if(fromUnit == MILES &&  toUnit == FEET) 
+            {
+                toDistance = fromDistance * FEET_IN_MILES;
+            }
+            else if (fromUnit == FEET && toUnit == MILES)
+            {
+                toDistance = fromDistance / FEET_IN_MILES;
+            }
 
+            if (fromUnit == FEET && toUnit == METRES)
+            {
+                toDistance = fromDistance / FEET_IN_METRES ;
+            }
+            else if (fromUnit == METRES && toUnit == FEET)
+            {
+                toDistance = fromDistance * FEET_IN_METRES ;
+            }
+
+            if (fromUnit == METRES && toUnit == MILES)
+            {
+                toDistance = fromDistance / METRE_IN_MILES ;
+            }
+            else if (fromUnit == MILES && toUnit == METRES)
+            {
+                toDistance = fromDistance * METRE_IN_MILES ;
+            }
         }
 
-        public void MilesToMetres()
+        private string SelectUnit(string prompt)
         {
-            OutputHeading("Converting Miles To Metres");
-            miles = InputDistance("Please Enter The Number of Miles > ");
-            CalculateMetres();
-            OutputDistance(miles, nameof(miles), metres, nameof(metres));
-
+            string choice = DisplayChoices(prompt);
+            string unit = ExecuteChoice(choice);
+            Console.WriteLine($"\n You have chosen {unit}");
+            return unit;
         }
+
+        private static string ExecuteChoice(string choice)
+        {
+            if (choice.Equals("1"))
+            {
+                return FEET;
+            }
+            else if (choice == "2")
+            {
+                return METRES;
+            }
+            else if (choice == "3")
+            {
+                return MILES;
+            }
+            return null;
+        }
+
+        private static string DisplayChoices(string prompt)
+        {
+            Console.WriteLine();
+            Console.WriteLine($" 1. {FEET}");
+            Console.WriteLine($" 2. {METRES}");
+            Console.WriteLine($" 3. {MILES}");
+            Console.WriteLine();
+
+            Console.Write(prompt);
+            string choice = Console.ReadLine();
+            return choice;
+        }
+
+
 
         /// <summary>
         /// prompt the user to input the distance in miles
@@ -56,32 +137,16 @@ namespace ConsoleAppProject.App01
         }
 
         
-        private void CalculateFeet()
-        {
-            feet = miles * FEET_IN_MILES;
-        }
 
-        private void CalculateMiles()
+        private void OutputDistance()
         {
-            miles = feet / FEET_IN_MILES;
-        }
-
-        private void CalculateMetres()
-        {
-            metres = miles * METRE_IN_MILES;
-        }
-
-        private void OutputDistance(
-            double fromDistance, string fromUnit,
-            double toDistance, string toUnit)
-        {
-            Console.WriteLine($"{fromDistance} {fromUnit}" +
-                $" is {toDistance} {toUnit}!");
+            Console.WriteLine($"\n {fromDistance} {fromUnit}" +
+                $" is {toDistance} {toUnit}!\n");
         }
 
         
 
-        private void OutputHeading(String prompt)
+        private void OutputHeading()
         {
             Console.WriteLine();
             Console.WriteLine("----------------------------------");
@@ -89,10 +154,6 @@ namespace ConsoleAppProject.App01
             Console.WriteLine("         By Husnain Ateeq         ");
             Console.WriteLine("----------------------------------");
             Console.WriteLine();
-
-            Console.WriteLine(prompt);
-            Console.WriteLine();
-
         }
 
     }
