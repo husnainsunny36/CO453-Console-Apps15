@@ -154,7 +154,8 @@ namespace ConsoleAppProject.Helpers
 
         internal static void OutputHeading1(string v)
         {
-            throw new NotImplementedException();
+            Console.WriteLine(v);
+            Console.WriteLine();
         }
     }
 }

@@ -7,7 +7,7 @@ internal static class ConsoleHelperHelpers
     /// This method will display a yellow title underlined
     /// by dashes.
     /// </summary>
-    public static void OutputTitle(string title)
+   /* public static void OutputTitle(string title)
     {
         Console.ForegroundColor = ConsoleColor.Yellow;
 
@@ -21,7 +21,7 @@ internal static class ConsoleHelperHelpers
 
         Console.WriteLine("\n");
         Console.ResetColor();
-    }
+    }*/
 
     /// <summary>
     /// This method will display a green title underlined
