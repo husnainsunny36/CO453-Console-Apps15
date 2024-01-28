@@ -11,7 +11,7 @@ namespace ConsoleAppProject.Helpers
     /// There are methods for outputting a main heading
     /// and a title.
     /// <author>
-    /// Derek Peacock 2021
+    /// Husnain Ateeq
     /// </author>
     /// </summary>
     public static class ConsoleHelper
@@ -114,18 +114,18 @@ namespace ConsoleAppProject.Helpers
         }
 
         /// <summary>
-        /// Output a short heading in green for the application
+        /// Output a short heading in yellow for the application
         /// and the name of the author and a prompt to
         /// inform the use which units are being converted
         /// Please change the authors name.
         /// </summary>
         public static void OutputHeading(string heading)
         {
-            Console.ForegroundColor = ConsoleColor.Green;
+            Console.ForegroundColor = ConsoleColor.Yellow;
 
             Console.WriteLine("\n ---------------------------------");
-            Console.WriteLine($"    {heading}          ");
-            Console.WriteLine("     by Derek Peacock           ");
+            Console.WriteLine($"       Student Grades              ");
+            Console.WriteLine("       by Husnain Ateeq             ");
             Console.WriteLine(" ---------------------------------" +
                 "\n");
 
@@ -133,12 +133,12 @@ namespace ConsoleAppProject.Helpers
         }
 
         /// <summary>
-        /// This method will display a green title underlined
+        /// This method will display a yellow title underlined
         /// by dashes.
         /// </summary>
         public static void OutputTitle(string title)
         {
-            Console.ForegroundColor = ConsoleColor.Green;
+            Console.ForegroundColor = ConsoleColor.Yellow;
 
             Console.WriteLine($"\n {title}");
             Console.Write(" ");
@@ -150,6 +150,11 @@ namespace ConsoleAppProject.Helpers
 
             Console.WriteLine("\n");
             Console.ResetColor();
+        }
+
+        internal static void OutputHeading1(string v)
+        {
+            throw new NotImplementedException();
         }
     }
 }
