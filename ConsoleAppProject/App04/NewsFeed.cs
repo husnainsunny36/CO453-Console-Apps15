@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ConsoleAppProject.Helpers;
+using System;
 using System.Collections.Generic;
 
 
@@ -7,70 +8,169 @@ namespace ConsoleAppProject.App04
     ///<summary>
     /// The NewsFeed class stores news posts for the news feed in a social network 
     /// application.
-    /// 
-    /// Display of the posts is currently simulated by printing the details to the
-    /// terminal. (Later, this should display in a browser.)
-    /// 
-    /// This version does not save the data to disk, and it does not provide any
-    /// search or ordering functions.
     ///</summary>
     ///<author>
-    ///  Michael Kölling and David J. Barnes
+    ///  Husnain Ateeq
     ///  version 0.1
     ///</author> 
     public class NewsFeed
     {
-        private readonly List<MessagePost> messages;
-        private readonly List<PhotoPost> photos;
+        public const string AUTHOR = "Husnain";
 
-        ///<summary>
-        /// Construct an empty news feed.
-        ///</summary>
+
+        private readonly List<Post> posts;
+
+        
         public NewsFeed()
         {
-            messages = new List<MessagePost>();
-            photos = new List<PhotoPost>();
+            posts = new List<Post>();
+
+            MessagePost post = new MessagePost(AUTHOR, "I Like Visual Studio 2021");
+            AddMessagePost(post);
+            post.AddComment("hello");
+
+            PhotoPost photoPost = new PhotoPost(AUTHOR, "Photo1.jpg", "Visual Studio 2021");
+            AddPhotoPost(photoPost);
+
+
         }
 
+        public Post Post
+        {
+            get => default;
+            set
+            {
+            }
+        }
 
-        ///<summary>
-        /// Add a text post to the news feed.
-        /// 
-        /// @param text  The text post to be added.
-        ///</summary>
+        
         public void AddMessagePost(MessagePost message)
         {
-            messages.Add(message);
+            posts.Add(message);
         }
 
-        ///<summary>
-        /// Add a photo post to the news feed.
-        /// 
-        /// @param photo  The photo post to be added.
-        ///</summary>
+        
         public void AddPhotoPost(PhotoPost photo)
         {
-            photos.Add(photo);
+            posts.Add(photo);
         }
 
-        ///<summary>
-        /// Show the news feed. Currently: print the news feed details to the
-        /// terminal. (To do: replace this later with display in web browser.)
-        ///</summary>
-        public void Display()
+        
+        public void DisplayAuthorPost(string author)
         {
-            // display all text posts
-            foreach (MessagePost message in messages)
+            foreach (Post post in posts)
             {
-                message.Display();
-                Console.WriteLine();   // empty line between posts
+                if (post.Username == author)
+                {
+                    post.Display();
+                }
+            }
+        }
+
+        
+        public void FindDate(string date)
+        {
+            foreach (Post post in posts)
+            {
+                if (post.Timestamp.ToLongDateString().Contains(date))
+                {
+                    post.Display();
+                }
+            }
+        }
+
+        
+        public void AddPostComment(int id, string text)
+        {
+            Post post = FindPost(id);
+
+            if (post == null)
+            {
+                Console.WriteLine($"\nPost with ID: {id} does not exist!\n");
+            }
+            else
+            {
+                Console.WriteLine($"\nThe comment have been added to post {id}!\n");
+                post.AddComment(text);
+                post.Display();
+            }
+        }
+
+        
+        public void LikePost(int id)
+        {
+            Post post = FindPost(id);
+
+            if (post == null)
+            {
+                Console.WriteLine($"\nPost with ID: {id} does not exist!\n");
+            }
+            else
+            {
+                Console.WriteLine($"\nYou have liked the the post {id}!\n");
+                post.Like();
+                post.Display();
+            }
+        }
+
+        
+        public void UnlikePost(int id)
+        {
+            Post post = FindPost(id);
+
+            if (post == null)
+            {
+                Console.WriteLine($"\nPost with ID: {id} does not exist!\n");
+            }
+            else
+            {
+                Console.WriteLine($"\nYou have unliked the the post {id}!\n");
+                post.Unlike();
+                post.Display();
+            }
+        }
+
+        
+        public void RemovePost(int id)
+        {
+            Post post = FindPost(id);
+
+            if (post == null)
+            {
+                Console.WriteLine($" \nPost with ID: {id} does not exist!\n");
+            }
+            else
+            {
+                Console.WriteLine($" \nThe following Post {id} has been removed!\n");
+
+                posts.Remove(post);
+                post.Display();
+            }
+        }
+
+        
+        public Post FindPost(int id)
+        {
+            foreach (Post post in posts)
+            {
+                if (post.PostId == id)
+                {
+                    return post;
+                }
             }
 
-            // display all photos
-            foreach (PhotoPost photo in photos)
+            return null;
+        }
+        
+        public void Display()
+        {
+            ConsoleHelper.OutputTitle("Display All Posts");
+
+            
+            foreach (Post post in posts)
             {
-                photo.Display();
-                Console.WriteLine();   // empty line between posts
+                post.Display();
+                Console.WriteLine();   
             }
         }
     }
