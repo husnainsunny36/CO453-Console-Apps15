@@ -1,6 +1,7 @@
 ﻿using ConsoleAppProject.App01;
 using ConsoleAppProject.App02;
 using ConsoleAppProject.App03;
+using ConsoleAppProject.App04;
 using ConsoleAppProject.Helpers;
 using System;
 
@@ -27,7 +28,7 @@ namespace ConsoleAppProject
             Console.WriteLine();
 
             // Display menu to choose between apps
-            int appChoice = DisplayAppMenu("Choose an app to run:\n1. Distance Converter\n2. BMI Calculator\n3. Student Grades");
+            int appChoice = DisplayAppMenu("Choose an app to run:\n1. Distance Converter\n2. BMI Calculator\n3. Student Grades\n4. Social App");
 
             // Run the chosen app
             switch (appChoice)
@@ -44,6 +45,10 @@ namespace ConsoleAppProject
                     RunStudentGradesApp();
                     break;
 
+                case 4:
+                    RunSocialApp();
+                    break;
+                   
                 default:
                     Console.WriteLine("Invalid choice. Exiting the program.");
                     break;
@@ -58,7 +63,7 @@ namespace ConsoleAppProject
             Console.WriteLine(prompt);
             Console.Write("Enter your choice: ");
 
-            while (!int.TryParse(Console.ReadLine(), out choice) || choice < 1 || choice > 3)
+            while (!int.TryParse(Console.ReadLine(), out choice) || choice < 1 || choice > 4)
             {
                 Console.Write("Invalid input. Please enter a valid choice: ");
             }
@@ -83,6 +88,12 @@ namespace ConsoleAppProject
         {
             StudentGrades studentGrades = new StudentGrades();
             studentGrades.StudentGradesMenu();
+        }
+
+        private static void RunSocialApp() 
+        {
+            NewsApp news = new NewsApp();
+            news.DisplayMenu();
         }
 
 

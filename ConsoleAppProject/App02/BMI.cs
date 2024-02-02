@@ -132,7 +132,7 @@ namespace ConsoleAppProject.App02
                 Console.Write("Invalid input. Please enter a valid weight in kilograms: ");
             }
         }
-
+        //can i close this? to try and open the inst yes
         public void GetImperialDetails()
         {
             // Get user input for Imperial details
