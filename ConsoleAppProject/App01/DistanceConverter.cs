@@ -23,6 +23,8 @@ namespace ConsoleAppProject.App01
 
         public DistanceUnits FromUnit { get; set; }
         public DistanceUnits ToUnit { get; set; }
+        public static DistanceUnits FEET { get; set; }
+        public static DistanceUnits MILES { get; set; }
 
         public DistanceConverter()
         {
