@@ -35,18 +35,23 @@ namespace ConsoleAppProject
             {
                 case 1:
                     RunDistanceConverter();
+                    Console.ReadLine();
+                    
                     break;
 
                 case 2:
                     RunBMIApp();
+                    Console.ReadLine();
                     break;
 
                 case 3:
                     RunStudentGradesApp();
+                    Console.ReadLine();
                     break;
 
                 case 4:
                     RunSocialApp();
+                    Console.ReadLine();
                     break;
                    
                 default:

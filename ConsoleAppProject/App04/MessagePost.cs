@@ -30,7 +30,7 @@ namespace ConsoleAppProject.App04
         {
             Message = text;
         }
-
+        //
         /// <summary>
         /// Display the new added massage post
         /// </summary>

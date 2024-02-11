@@ -55,33 +55,37 @@ namespace ConsoleAppProject.App01
 
 
         public void CalculateDistance()
+
         {
             if (FromUnit == DistanceUnits.Miles && ToUnit == DistanceUnits.Feet)
             {
                 ToDistance = FromDistance * FEET_IN_MILES;
             }
+            else if (FromUnit == DistanceUnits.Miles && ToUnit == DistanceUnits.Metres)
+            {
+                ToDistance = FromDistance * METRE_IN_MILES;
+            }
             else if (FromUnit == DistanceUnits.Feet && ToUnit == DistanceUnits.Miles)
             {
                 ToDistance = FromDistance / FEET_IN_MILES;
             }
-
-            if (FromUnit == DistanceUnits.Feet && ToUnit == DistanceUnits.Metres)
+            else if (FromUnit == DistanceUnits.Feet && ToUnit == DistanceUnits.Metres)
             {
                 ToDistance = FromDistance / FEET_IN_METRES;
             }
-            else if (FromUnit == DistanceUnits.Miles && ToUnit == DistanceUnits.Feet)
-            {
-                ToDistance = FromDistance * FEET_IN_METRES;
-            }
-
-            if (FromUnit == DistanceUnits.Metres && ToUnit == DistanceUnits.Miles)
+            else if (FromUnit == DistanceUnits.Metres && ToUnit == DistanceUnits.Miles)
             {
                 ToDistance = FromDistance / METRE_IN_MILES;
             }
-            else if (FromUnit == DistanceUnits.Miles && ToUnit == DistanceUnits.Feet)
+            else if (FromUnit == DistanceUnits.Metres && ToUnit == DistanceUnits.Feet)
             {
-                ToDistance = FromDistance * METRE_IN_MILES;
+                ToDistance = FromDistance * FEET_IN_METRES;
             }
+            else if (FromUnit == ToUnit)
+            {
+                ToDistance = FromDistance;
+            }
+
         }
 
         private DistanceUnits SelectUnit(string prompt)
@@ -149,7 +153,13 @@ namespace ConsoleAppProject.App01
                 try
                 {
                     enteredDistance = Convert.ToDouble(value);
+                    
                     isValidInput = true;
+                    if (enteredDistance < 0)
+                    {
+                        isValidInput = false;
+                        Console.WriteLine("Invalid Input");
+                    }
                 }
                 catch (Exception E)
                 {
