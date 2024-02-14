@@ -132,7 +132,7 @@ namespace ConsoleAppProject.App02
                 Console.Write("Invalid input. Please enter a valid weight in kilograms: ");
             }
         }
-        //can i close this? to try and open the inst yes
+        
         public void GetImperialDetails()
         {
             // Get user input for Imperial details
@@ -165,7 +165,7 @@ namespace ConsoleAppProject.App02
         {
             // Display message related to ethnic groups
             string bame = ("\n if you are Black, Asian, or other minority ethnic groups, " +
-                " you have a higher risk, Adults at 23.0 or more are at increased risk," +
+                " \n you have a higher risk, Adults at 23.0 or more are at increased risk," +
                 " Adults at 27.5 or more are at high risk.");
 
             return bame;
