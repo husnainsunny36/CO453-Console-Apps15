@@ -68,7 +68,7 @@ namespace ConsoleAppProject.App04
             Console.WriteLine($"\tTime Elpased:\t {FormatElapsedTime(Timestamp)}");
             Console.WriteLine($"\tDate Posted:\t {Timestamp.ToLongDateString()}");
             Console.WriteLine($"\tTime Posted:\t {Timestamp.ToLongTimeString()}");
-            Console.ForegroundColor = ConsoleColor.Green;
+            Console.ForegroundColor = ConsoleColor.Yellow;
             Console.WriteLine("===================================================");
             Console.ForegroundColor = ConsoleColor.Yellow;
 
@@ -87,7 +87,7 @@ namespace ConsoleAppProject.App04
             if (comments.Count == 0)
             {
                 Console.WriteLine("    No comments.");
-                Console.ForegroundColor = ConsoleColor.Green;
+                Console.ForegroundColor = ConsoleColor.Yellow;
                 Console.WriteLine("===================================================");
                 Console.ForegroundColor = ConsoleColor.Yellow;
             }
@@ -97,7 +97,7 @@ namespace ConsoleAppProject.App04
                 foreach (string comments in comments)
                 {
                     Console.WriteLine($"\tComment: {comments}\n");
-                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.ForegroundColor = ConsoleColor.Yellow;
                     Console.WriteLine("===================================================");
                     Console.ForegroundColor = ConsoleColor.Yellow;
 

@@ -21,6 +21,8 @@ namespace ConsoleAppProject.App02
         const double ObeseClass1 = 34.9;
         const double ObeseClass2 = 39.9;
 
+        
+
         public void Main()
         {
             OutputHeading();
@@ -179,6 +181,11 @@ namespace ConsoleAppProject.App02
             Console.WriteLine("           By Husnain Ateeq       ");
             Console.WriteLine("----------------------------------");
             Console.WriteLine();
+        }
+
+        public void GetImperialBMI()
+        {
+            throw new NotImplementedException();
         }
     }
 }
