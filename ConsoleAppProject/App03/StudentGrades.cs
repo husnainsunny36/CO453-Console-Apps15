@@ -15,7 +15,7 @@ namespace ConsoleAppProject.App03
     /// </author>
     public class StudentGrades
     {
-        //Constants
+        // Constants representing the highest possible mark, various grade thresholds, and the lowest possible mark.
         public const int HighestMark = 100;
         public const int LowestGradeA = 70;
         public const int LowestGradeB = 60;
@@ -23,7 +23,7 @@ namespace ConsoleAppProject.App03
         public const int LowestGradeD = 40;
         public const int LowestMark = 0;
 
-        //properties
+        // Properties to store student names, their marks, a profile of grades, and statistical data.
         public string[] Students { get; set; }
         public int[] Marks { get; set; }
         public int[] GradeProfile { get; set; }
@@ -32,32 +32,19 @@ namespace ConsoleAppProject.App03
         public int Maximum { get; set; }
         public string StudentClass { get; set; }
 
-
-        //Attributes
-
-        ///<summary>
-        ///Class Constructor called when an object
-        ///is created and sets up an array of students
-        ///</summary>
-
+        // Constructor initializes the students' names and arrays for marks and grade profile.
         public StudentGrades()
         {
             Students = new string[]
             {
-                 "Husnain", "Kaleem", "Asim", "Ismael", "Noman",
-                "Jake", "Flavious", "Carl", "Andy", "Danny"
+            "Husnain", "Kaleem", "Asim", "Ismael", "Noman", "Jake", "Flavious", "Carl", "Andy", "Danny"
             };
 
             GradeProfile = new int[(int)Grades.A + 1];
             Marks = new int[Students.Length];
-
-
-
         }
 
-        /// <summary>
-        /// Input a mark between 0 - 100 for 
-        /// </summary>
+        // Method to input marks for each student, ensuring they are within the valid range.
         public void InputMarks()
         {
             ConsoleHelper.OutputHeading1("\t\tPlease enter a mark for each student");
@@ -65,16 +52,12 @@ namespace ConsoleAppProject.App03
             {
                 Marks[i] = (int)ConsoleHelper.InputNumber($"Enter {Students[i]} marks: ", LowestMark, HighestMark);
             }
-
             Console.WriteLine();
             ConsoleHelper.OutputHeading("\t\t Student Marks System");
             DisplayMenu("\nPlease enter your choice > ");
         }
 
-        /// <summary>
-        /// List all the student and display their
-        /// name and current mark.
-        /// </summary>
+        // Method to output each student's name, mark, grade, and class.
         public void OutputMarks()
         {
             ConsoleHelper.OutputHeading1("\t\tThe each Student Marks");
@@ -89,10 +72,7 @@ namespace ConsoleAppProject.App03
             DisplayMenu("\n\nPlease enter your choice > ");
         }
 
-        /// <summary>
-        /// Convert a student mark to a grade
-        /// from F(fail) to A (First Class)
-        /// </summary>
+        // Method to convert numeric marks into letter grades and classes based on defined thresholds.
         public Grades ConvertToGrade(int mark)
         {
             if (mark >= LowestMark && mark < LowestGradeD)
@@ -126,21 +106,16 @@ namespace ConsoleAppProject.App03
             }
         }
 
-        /// <summary>
-        /// Calculate and display the minimum, maximum
-        /// and mean mark for all the students.
-        /// </summary>
+        // Method to calculate and display statistical data such as mean, minimum, and maximum marks.
         public void CalculateStats()
         {
             Minimum = Marks[0];
             Maximum = Marks[0];
 
             double total = 0;
-
             foreach (int mark in Marks)
             {
                 total += mark;
-
                 if (mark > Maximum)
                 {
                     Maximum = mark;
@@ -149,7 +124,6 @@ namespace ConsoleAppProject.App03
                 {
                     Minimum = mark;
                 }
-
             }
 
             Mean = total / Marks.Length;
@@ -161,9 +135,7 @@ namespace ConsoleAppProject.App03
             DisplayMenu("\n\nPlease enter your choice > ");
         }
 
-        /// <summary>
-        /// Calculate  Grade profile of students 
-        /// </summary>
+        // Method to calculate the grade distribution of students.
         public void CalculateGradeProfile()
         {
             for (int i = 0; i < GradeProfile.Length; i++)
@@ -178,9 +150,7 @@ namespace ConsoleAppProject.App03
             }
         }
 
-        /// <summary>
-        /// Output the resul of grade profile 
-        /// </summary>
+        // Method to output the grade distribution of students.
         public void OutputGradeProfile()
         {
             Grades grade = Grades.D;
@@ -191,7 +161,6 @@ namespace ConsoleAppProject.App03
                 int percentage = count * 100 / Marks.Length;
                 Console.WriteLine($"Grade {grade}\t {percentage}%\t Count {count}");
                 grade++;
-
             }
 
             Console.WriteLine();
@@ -199,28 +168,22 @@ namespace ConsoleAppProject.App03
             DisplayMenu("\n\nPlease enter your choice > ");
         }
 
-        /// <summary>
-        /// Prompt the user to select their choice
-        /// </summary>
+        // Method to display a menu and capture the user's choice.
         private void DisplayMenu(string display)
         {
             string[] choices =
             {
-                "Input Marks",
-                "Ouput Marks",
-                "Output Stats",
-                "Ouput Grade Profile",
-                "Quit"
-            };
+            "Input Marks",
+            "Output Marks",
+            "Output Stats",
+            "Output Grade Profile",
+            "Quit"
+        };
             int choiceNo = ConsoleHelper.SelectChoice(choices);
             GradeIndex(choiceNo);
-
         }
 
-        /// <summary>
-        /// Prompt the user to select input marks, output mark, calculate satats
-        /// calculate gradeProfile, output grade profile and input the marks
-        /// </summary>
+        // Method to handle the user's menu selection and invoke corresponding functionality.
         public void GradeIndex(int choiceNo)
         {
             switch (choiceNo)
@@ -248,14 +211,10 @@ namespace ConsoleAppProject.App03
             }
         }
 
-        /// <summary>
-        /// Ouput the heading and 
-        /// display the menu
-        /// </summary>
+        // Method to display the main menu for the student grades management system.
         public void StudentGradesMenu()
         {
             ConsoleHelper.OutputHeading("\t\t Student Marks System");
             DisplayMenu("Please enter your choice > ");
         }
     }
-}

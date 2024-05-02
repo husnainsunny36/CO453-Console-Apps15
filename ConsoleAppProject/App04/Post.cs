@@ -11,40 +11,46 @@ namespace ConsoleAppProject.App04
     /// </author>
     public class Post
     {
-        
-
+        // Properties to store the ID, username, and timestamp of the post.
         public int PostId { get; }
         public String Username { get; set; }
-
         public DateTime Timestamp { get; }
 
+        // Static variable to track the number of instances (posts) created.
         public static int instances = 0;
 
+        // A private variable to count likes on the post.
         private int likes;
-        
 
+        // A private list to hold comments made on the post.
         private readonly List<String> comments;
 
-        
+        /// <summary>
+        /// Constructor to create a new post and initialize it with the author's username.
+        /// </summary>
         public Post(String author)
         {
             instances++;
-            PostId = instances;
+            PostId = instances; // Unique ID based on the number of instances.
 
-            this.Username = author;
-            Timestamp = DateTime.Now;
+            this.Username = author; // Set the author's username.
+            Timestamp = DateTime.Now; // Set the timestamp to the current time.
 
-            likes = 0;
-            comments = new List<String>();
+            likes = 0; // Initialize likes to zero.
+            comments = new List<String>(); // Initialize the list of comments.
         }
 
-        
+        /// <summary>
+        /// Method to increase the like count of the post.
+        /// </summary>
         public void Like()
         {
             likes++;
         }
 
-        
+        /// <summary>
+        /// Method to decrease the like count of the post if there are any likes.
+        /// </summary>
         public void Unlike()
         {
             if (likes > 0)
@@ -53,27 +59,30 @@ namespace ConsoleAppProject.App04
             }
         }
 
-        
+        /// <summary>
+        /// Method to add a comment to the post.
+        /// </summary>
         public void AddComment(String text)
         {
             comments.Add(text);
         }
 
-        
+        /// <summary>
+        /// Virtual method to display the details of the post, which can be overridden in derived classes.
+        /// </summary>
         public virtual void Display()
         {
             Console.WriteLine();
             Console.WriteLine($"\tPost ID:\t {PostId}");
             Console.WriteLine($"\tAuthor:\t\t {Username}");
-            Console.WriteLine($"\tTime Elpased:\t {FormatElapsedTime(Timestamp)}");
+            Console.WriteLine($"\tTime Elapsed:\t {FormatElapsedTime(Timestamp)}");
             Console.WriteLine($"\tDate Posted:\t {Timestamp.ToLongDateString()}");
             Console.WriteLine($"\tTime Posted:\t {Timestamp.ToLongTimeString()}");
             Console.ForegroundColor = ConsoleColor.Yellow;
             Console.WriteLine("===================================================");
-            Console.ForegroundColor = ConsoleColor.Yellow;
-
             Console.WriteLine();
 
+            // Display the number of likes if there are any.
             if (likes > 0)
             {
                 Console.WriteLine($"    Likes: -  {likes}  people like this.");
@@ -82,38 +91,35 @@ namespace ConsoleAppProject.App04
             {
                 Console.WriteLine();
             }
-            
 
+            // Display comments or a message if there are no comments.
             if (comments.Count == 0)
             {
                 Console.WriteLine("    No comments.");
-                Console.ForegroundColor = ConsoleColor.Yellow;
                 Console.WriteLine("===================================================");
-                Console.ForegroundColor = ConsoleColor.Yellow;
             }
             else
             {
                 Console.WriteLine($"    Comment(s): {comments.Count}  Click here to view.");
-                foreach (string comments in comments)
+                foreach (string comment in comments)
                 {
-                    Console.WriteLine($"\tComment: {comments}\n");
-                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    Console.WriteLine($"\tComment: {comment}");
                     Console.WriteLine("===================================================");
-                    Console.ForegroundColor = ConsoleColor.Yellow;
-
                 }
-
-
             }
         }
 
-        
+        /// <summary>
+        /// Static method to retrieve the number of posts created.
+        /// </summary>
         public static int GetNumberOfPosts()
         {
             return instances;
         }
 
-         
+        /// <summary>
+        /// Private helper method to format the elapsed time since the post was created.
+        /// </summary>
         private String FormatElapsedTime(DateTime time)
         {
             DateTime current = DateTime.Now;
@@ -131,8 +137,4 @@ namespace ConsoleAppProject.App04
                 return seconds + " seconds ago";
             }
         }
-
     }
-
-
-}
